@@ -12,6 +12,14 @@ class Customer{
       age: json["age"] as int
     );
   }
+  Map<String, dynamic> toJson() {
+    return {
+      "id": id,
+      "name": name,
+      "address": address,
+      "age": age,
+    };
+  }
   @override
   String toString(){
     return "id: $id, name:$name, address:$address, age: $age";
