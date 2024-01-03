@@ -17,5 +17,30 @@ void main(List<String> arguments) async {
   Customer cus = await customerService.findCustomerById(1);
   print("cus $cus");
 
+  // Create
+  Customer newCustomer = Customer(name: "John Doe", address: "123 Main St", age: 25);
+  Customer createdCustomer = await customerService.createCustomer(newCustomer);
+  print("Created Customer: $createdCustomer");
+
+  // Update
+  int customerIdToUpdate = 1; // Assume you have an existing customer with ID 1
+  Customer existingCustomer = await customerService.findCustomerById(customerIdToUpdate);
+
+  if (existingCustomer.id != null) {
+    existingCustomer.name = "Updated Name";
+    existingCustomer.address = "Updated Address";
+    existingCustomer.age = 30;
+
+    Customer updatedCustomer = await customerService.updateCustomer(existingCustomer.id!, existingCustomer);
+    print("Updated Customer: $updatedCustomer");
+  } else {
+    print("Customer with ID $customerIdToUpdate not found.");
+  }
+
+  // Delete
+  int customerIdToDelete = 2; // Assume you have an existing customer with ID 2
+  await customerService.deleteCustomer(customerIdToDelete);
+  print("Customer with ID $customerIdToDelete deleted.");
+
 
 }
